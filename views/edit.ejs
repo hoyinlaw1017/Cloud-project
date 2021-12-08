@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>inventorys</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+            function goBack() { window.history.back();}
+            </script>
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Update inventory : <%= doc[0].name %> </h1>
+            <p ></p>Owner: <%= doc[0].manager %></p><br>
+        </div>
+        <div class="container-fluid text-left">
+            <form action="/update" method="POST" enctype="multipart/form-data">
+                <!--the enctype attribute is required for a file upload control form-->
+                <!--the attribute is not encoding characters-->
+                <label for="name">Name*:</label>
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name" value= <%= doc[0].name %> required> <br>
+
+                <label for="inv_type">Type:</label>
+                <input type="text" id="type" name="type" class="form-control" placeholder="inv_type" value = <%= doc[0].type %>><br>
+                
+                <label for="quantity">Quantity:</label>
+                <input type="text" id="quantity" name="quantity" class="form-control" placeholder="quantity" value =<%= doc[0].quantity %>><br>
+                
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" class="form-control" placeholder="Street" value =<%= doc[0].inventory_address.street %>> <br>
+                
+                <label for="building">Building:</label>
+                <input type="text" id="building" name="building" class="form-control" placeholder="Building" value = <%= doc[0].inventory_address.building %> ><br>
+                
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" class="form-control" placeholder="country" value = <%= doc[0].inventory_address.country %> ><br>
+				
+                <label for="zipcode">Zipcode:</label>
+                <input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="Zipcode"  value = <%= doc[0].inventory_address.zipcode %>><br>
+
+                <label for="latitude">GPS Latitude:</label>
+                <input type="text" id="latitude" name="latitude" class="form-control" placeholder="Latitude"  value = <%= doc[0].inventory_address.latitude %>><br>
+
+                <label for="longitude">GPS Longitude:</label>
+                <input type="text" id="longitude" name="longitude" class="form-control" placeholder="Longitude"  value =<%= doc[0].inventory_address.longitude %>><br>
+                
+                <div class="custom-file">
+                    <label class="custom-file-label" for="photo">Update New Photo:</label>
+                    <div class="row" >
+                        
+                        <img src="data:<%= doc[0].photo_mimetype %>;base64, <%= doc[0].photo %>">                        
+                    </div>
+                    <input type="file" name="filetoupload"><br>
+                </div>
+                <input type="hidden" id="_id" name="_id" value=<%= doc[0]._id %>>
+                <input type="hidden" id="manager" name="manager" value=<%= doc[0].manager %>>
+                <input type="submit" value="update">
+            </form>
+        </div>
+    </body>
+    <script>
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>inventorys</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+   <body>
+      <div class="jumbotron text-center">
+        <H1>Hello, <%= name %>!</H1>
+        <p>There are <%= doc.length %> documents.</p>
+        <p>s1275433 Cheung Ho Yan</p>
+        <p>s1275519 Law Ho Yin</p>
+        <p>s1289516 Li Heng</p>          
+      </div>
+
+   </body>
+
+
+        <div class="container-fluid">
+            <div class="row ml-md-auto">
+                <a href="/logout" class="btn btn-primary pull-right" role="button">Log out</a>
+                <a href="/create" class="btn btn-primary" role="button">Create new inventory</a>
+            </div>
+            <br>
+            <div class="row">
+                <p>Search inventory name:
+                <label for="bar"><span class="glyphicon glyphicon-search"></span></label><input style="width:100%" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search name:" name="bar"><br></p>
+                <table id="myTable" class="table table-striped table-bordered table-hover table-scroll">
+                    <thead ><tr class="table-primary"><th>inventory Name</th></tr></thead>
+                    <tbody style='height:300px;display:block;overflow:scroll'>
+                        <% for (var i = 0; i < doc.length; i++) { %>
+                            <tr>
+                                <td><a href="/details?_id=<%= doc[i]._id %>"> <%= doc[i].name %></a></td>
+                                <td style="display:none;"></td>
+                                <td style="display:none;"></td>
+                            </tr>   
+                        <% } %>                     
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+        <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        </script>
+</html>

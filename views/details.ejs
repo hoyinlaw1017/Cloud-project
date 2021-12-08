@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>inventory</title>
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script>
+        function goBack() { window.history.back();}
+        </script>
+        <style>
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron text-center">
+            <h1>Details of <%= doc[0].name %></h1>
+        </div>
+        <div class="container-fluid">
+            <div class="well">
+            <div class="row">
+                <% if (doc[0].photo) { %>
+                    <img src="data:<%= doc[0].photo_mimetype %>;base64, <%= doc[0].photo %>"><br>
+                <% } %>
+            </div>
+            <div class="row">
+                    <p>Type:  <%= doc[0].type %></p><br>
+                    <p>Quantity:  <%= doc[0].quantity %></p><br>
+                    <p>Street:  <%= doc[0].inventory_address.street %></p><br>
+                    <p>Building:  <%= doc[0].inventory_address.building %></p><br>
+                    <p>Country:  <%= doc[0].inventory_address.country %></p><br>
+                    <p>Zipcode:  <%= doc[0].inventory_address.zipcode %></p><br>
+                    <p>GPS:  [<%= doc[0].inventory_address.latitude %>,<%= doc[0].inventory_address.longitude %>]</p><br>
+
+    
+                <p>Manager: <%= doc[0].manager %></p><br>
+                
+                
+                    <a href="/map?lat=<%= doc[0].inventory_address.latitude %>&lon=<%= doc[0].inventory_address.longitude %>" class="btn btn-info" role="button">Map</a>
+                
+            </div>
+            </div>
+            <div class="row ml-md-auto">
+
+                <a href="/edit?_id=<%= doc[0]._id %>" class="btn btn-primary" role="button">Edit</a>
+                <a href="/delete?_id=<%= doc[0]._id %>&owner=<%= doc[0].manager %>" class="btn btn-primary" role="button">Delete</a>
+                
+                <button class="btn btn-primary" onclick="goBack()">Back</button>
+            </div>
+            <br>            
+        </div>
+    </body>
+</html>

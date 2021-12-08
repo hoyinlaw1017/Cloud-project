@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "description": "Mini project of S381F",
+  "author": "Cheung Ho Yan, Law Ho Yin, Li Heng",
+  "version": "0.0.1",
+  "dependencies": {
+    "mongodb": "3.1",
+    "express-formidable": "*",
+    "express" : "*",
+    "cookie-session": "latest",
+    "ejs": "*",
+    "nodemon": "^2.0.6"
+  },
+  "engine": "node >= 0.12.0",
+  "scripts": {
+    "start": "node projectServer"
+  }
+} 
