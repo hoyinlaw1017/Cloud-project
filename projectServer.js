@@ -257,7 +257,7 @@ app.get('/delete', (req,res) => {
 		res.status(200).render('info', {message: `The document has been deleted!`})
 		});
 	}else {
-		res.status(200).render('info', {message: `You don't have permission to detete this document!`})
+		res.status(200).render('info', {message: `You don't have permission to delete this document!`})
 	}
 });
 
